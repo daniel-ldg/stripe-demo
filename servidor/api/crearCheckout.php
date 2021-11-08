@@ -1,6 +1,7 @@
 <?php
 
 include __DIR__ . '/../db/productos.php';
+include __DIR__ . '/../stripe.php';
 
 if (!isset($_POST["producto"]) || empty($_POST["producto"])) {
     http_response_code(400);
@@ -16,3 +17,26 @@ if ($producto == null) {
     exit;
 }
 
+$checkout = $stripe->checkout->sessions->create([
+  'success_url' => 'https://example.com/success',
+  'cancel_url' => 'https://example.com/cancel',
+  'payment_method_types' => ['card', 'oxxo'],
+  'line_items' => [
+    [
+      'amount' => $producto["precio"],
+      'currency' => 'MXN',
+      'description' => $producto["descripcion"],
+      'images' => [$producto["foto"]],
+      'name' => $producto["nombre"],
+      'quantity' => 1
+    ]
+    ],
+  'mode' => 'payment',
+]);
+
+$respuesta = [
+    'id' => $checkout
+];
+
+header('Content-Type: application/json');
+echo json_encode($respuesta);
