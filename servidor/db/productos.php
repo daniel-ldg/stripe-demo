@@ -19,4 +19,18 @@ class ModeloProductos {
         return null;
     }
 
+    
+    public static function getProductoById($idProducto) {
+        $tabla = self::$TABLA_PRODUCTOS;
+        $stmt = Conexion::conectar()->prepare("SELECT * from $tabla WHERE id = :id");
+        $stmt->bindParam(":id", $idProducto, PDO::PARAM_STR);      
+        if ($stmt->execute()) {
+            if ($stmt->rowCount() > 0) {
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+        } else {
+            error_log("bd_error:" . implode(":", $stmt->errorInfo()));
+        }
+        return null;
+    }
 }
