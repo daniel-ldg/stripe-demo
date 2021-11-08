@@ -7,7 +7,7 @@ $(function () {
                 $("#productos").append(
                     `<div class="text-center col-lg-3 mt-5">
                         <div class="card">
-                            <img src="assets/${producto.foto}" class="card-img-top">
+                            <img src="${producto.foto}" class="card-img-top">
                             <h5 class="card-header">${producto.marca}</h5>
                             <div class="card-body">
                                 <h5 class="card-title">${producto.nombre}</h5>
