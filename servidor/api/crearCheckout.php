@@ -35,7 +35,7 @@ $checkout = $stripe->checkout->sessions->create([
 ]);
 
 $respuesta = [
-    'id' => $checkout
+    'id' => $checkout->id
 ];
 
 header('Content-Type: application/json');
