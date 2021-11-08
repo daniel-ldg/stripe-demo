@@ -18,8 +18,8 @@ if ($producto == null) {
 }
 
 $checkout = $stripe->checkout->sessions->create([
-  'success_url' => 'https://example.com/success',
-  'cancel_url' => 'https://example.com/cancel',
+  'success_url' => 'http://localhost/stripe-demo-checkout/cliente/comprar.html',
+  'cancel_url' => 'http://localhost/stripe-demo-checkout/cliente/comprar.html',
   'payment_method_types' => ['card', 'oxxo'],
   'line_items' => [
     [
